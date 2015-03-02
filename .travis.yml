@@ -8,7 +8,7 @@ os:
 git:
     submodules: false
 before_install:
-- sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+#- sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 - git submodule update --init --recursive
 - git checkout next
 - git submodule foreach git checkout next
@@ -32,7 +32,6 @@ before_script:
 - cmake -H. -Bbuild_maidsafe -DCMAKE_BUILD_TYPE=Debug -DCOVERAGE=On -DCMAKE_CXX_COMPILER=g++-4.9 -DCMAKE_C_COMPILER=gcc-4.9
 - cd build_maidsafe
 script:
-- ./configure --enable-gcov && make && make check
 - make AllCommon
 after_success:
 - coveralls --exclude lib --exclude tests --gcov-options '\-lp' 
